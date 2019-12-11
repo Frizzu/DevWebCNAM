@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  -data = data || {}
+  h1 Inscription
+
+  if errors
+    ul
+      for error in errors
+        li= error.msg
+
+  //register form
+  form(method='POST' action='/')
+    div.form-group
+      label(for='name') Pseudo :
+      input#name.form-control(type='text', placeholder='yololo' name='name')
+    div.form-group
+      label(for='email') Email :
+      input#email.form-control(type='email', placeholder='name@email.com' name='email')
+    button.btn.btn-primary(type='submit') S'enregistrer

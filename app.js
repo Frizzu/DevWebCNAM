@@ -9,7 +9,7 @@ require('dotenv').config();
 require('./models/Registration');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const usersRouter = require('./routes/userEdit');
 
 const app = express();
 
@@ -36,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/users/:userId', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -51,6 +52,13 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  next();
 });
 
 module.exports = app;

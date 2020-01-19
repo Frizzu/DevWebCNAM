@@ -1,7 +1,6 @@
 extends layout
 
 block content
-  -data = data || {}
   h1 Inscription
 
   if errors
@@ -18,3 +17,19 @@ block content
       label(for='email') Email :
       input#email.form-control(type='email', placeholder='name@email.com' name='email')
     button.btn.btn-primary(type='submit') S'enregistrer
+
+  h1 Liste d'utilisateurs
+
+  if registrations && registrations.length
+    div.container
+      each registration in registrations
+        div.row
+          div.col-sm
+            span.userName= registration.name
+          div.col-sm
+            span.userEmail= registration.email
+          div.col-sm
+            a(class='btn btn-secondary userEditButton' href="/users/" + registration._id) Editer
+            button(type='button' class='btn btn-danger userDeleteButton' onclick="deleteUser('" + registration._id + "')") Supprimer
+  else
+    p No registrations yet :(

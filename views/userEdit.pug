@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    h1 Edition d'utilisateur
+
+    if user
+        form(method='POST' action='/users')
+            input(type="hidden" name="_id" value=user._id)
+            div.form-group
+                label(for='name') Pseudo :
+                input#name.form-control(type='text' value=user.name name='name')
+            div.form-group
+                label(for='email') Email :
+                input#email.form-control(type='email' value=user.email name='email')
+            button.btn.btn-primary(type='submit') Modifier
